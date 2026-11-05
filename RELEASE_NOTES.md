@@ -1,31 +1,47 @@
-# The King of Fighters XI — Windows & Steam Deck
-## Experimental Preview
+# The King of Fighters XI — v0.1.0-beta (release candidate)
 
-> Release description draft. No build artifacts are included with this documentation.
+> Release notes prepared for a beta release. The GitHub release and binary assets have **not yet been published**.
 
-An experimental project targeting the PlayStation 2 version of The King of Fighters XI on Windows and Steam Deck, powered by [ps2-native-recomp](https://github.com/exoteric33/ps2-native-recomp).
+Experimental native Linux / Steam Deck runner for the PlayStation 2 version of **The King of Fighters XI (Europe, SLES_544.37)**, using [ps2-native-recomp](https://github.com/exoteric33/ps2-native-recomp).
 
-### Platform goals
+## Verified on the developer's Steam Deck
 
-- **Windows:** setup and launcher support for building and running the game locally.
-- **Linux / Steam Deck:** native Linux support with planned AppImage packaging and Steam library integration.
+- Native Linux runner launches the game.
+- Steam Deck AppImage launches with the supplied game files.
+- Graphics, audio and Steam Deck controller work in local testing.
+- Memory card is detected and an existing save was read.
+- Updated AppImage includes SDL2 and passed a roughly 33-second local launch test with zero audio underruns.
+- A separate test using invalid compiler environment overrides also launched successfully, but this **does not establish compiler independence**, because fallback compilers and existing translation caches may still be used.
 
-### Current status
+## Beta limitations
 
-The upstream framework reports successful gameplay testing for The King of Fighters XI, but the game has not been verified from start to finish. This project’s Windows packages, Steam Deck compatibility, performance, controls, audio, and saving require separate validation.
+- **Not tested on a clean Steam Deck or another Linux system.** The runtime may still need an external C++ compiler for EE/VU live translation; the developer machine has a separate 2.5 GB toolchain installed.
+- Gaming Mode, Windows release binaries, and full-game completion have not been verified.
+- The package is experimental, not a guaranteed standalone native recompilation.
+- No copyrighted game ISO, ELF, BIOS, extracted assets, or translated game code should be uploaded.
 
-Treat this preview as experimental. Platform goals do not guarantee that a corresponding download is available in this release.
+## Planned release assets
 
-### Requirements
+- `KOF-XI-Steam-Deck-x86_64.AppImage` (built and locally tested; not yet uploaded)
+- `KOF-XI-Steam-Deck-x86_64.AppImage.sha256` (generated locally; not yet uploaded)
+- Native Linux archive (pending packaging and verification)
 
-Supply a disc image from your own PS2 copy of The King of Fighters XI and follow the repository’s setup instructions when available. Game assets, extracted executables, and translated game code are not included in public packages.
+SHA-256 for the locally tested AppImage:
 
-### Reporting problems
+```text
+63423e1e52a745e0a65a764c8d63f551808a727690d77f39f5f762c8da026f67  KOF-XI-Steam-Deck-x86_64.AppImage
+```
 
-Include your operating system, hardware, game region, package version, and steps to reproduce the issue. Attach relevant logs without uploading game files.
+## Local installation / testing
 
-### Credits
+1. Supply your own legally obtained European PS2 game disc image and extracted executable.
+2. Place the ISO at `~/.local/share/kof-xi/game/disc.iso` and the executable at `~/.local/share/kof-xi/game/SLES_544.37`.
+3. Mark the AppImage executable: `chmod +x KOF-XI-Steam-Deck-x86_64.AppImage`.
+4. Run it on a compatible Linux x86-64 system. If FUSE is unavailable, try `./KOF-XI-Steam-Deck-x86_64.AppImage --appimage-extract-and-run`.
+5. Save data is stored under `~/.local/share/kof-xi/saves/`.
 
-Built using ps2-native-recomp by exoteric33, based on ps2-web-recomp by Samir Nuri.
+This is an unofficial community project, not affiliated with SNK or Sony. The King of Fighters XI and related assets belong to their respective rights holders.
 
-The King of Fighters XI belongs to its respective rights holders. This is an unofficial community project with no affiliation with SNK or Sony.
+## Credits
+
+Built using ps2-native-recomp by exoteric33.
